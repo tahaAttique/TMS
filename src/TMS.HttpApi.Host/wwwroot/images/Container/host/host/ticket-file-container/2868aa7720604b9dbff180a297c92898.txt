@@ -1,0 +1,120 @@
+Table: Staff
+sql
+Copy code
+CREATE TABLE Staff (
+    StaffID INT PRIMARY KEY AUTO_INCREMENT,
+    FullName VARCHAR(100) NOT NULL,
+    PreferredName VARCHAR(50),
+    DateOfBirth DATE NOT NULL,
+    Gender ENUM('Male', 'Female', 'Non-Binary', 'Other') NOT NULL,
+    ProfilePictureUrl VARCHAR(255),
+    PhoneNumber VARCHAR(20) NOT NULL,
+    AlternatePhoneNumber VARCHAR(20),
+    EmailAddress VARCHAR(100) NOT NULL UNIQUE,
+    ResidentialAddress TEXT NOT NULL,
+    EmergencyContactName VARCHAR(100),
+    EmergencyContactRelation VARCHAR(50),
+    EmergencyContactPhone VARCHAR(20),
+    Designation VARCHAR(100) NOT NULL,
+    DepartmentID INT NOT NULL,
+    EmployeeType ENUM('Full-Time', 'Part-Time', 'Contractual') NOT NULL,
+    JoiningDate DATE NOT NULL,
+    Experience INT DEFAULT 0,
+    EmployeeCode VARCHAR(50) UNIQUE,
+    SupervisorID INT,
+    WorkHours VARCHAR(50),
+    EmploymentStatus ENUM('Active', 'On Leave', 'Resigned', 'Retired') NOT NULL,
+    Username VARCHAR(50) UNIQUE,
+    PasswordHash VARCHAR(255),
+    AccessLevel ENUM('Admin', 'Faculty', 'Staff') NOT NULL,
+    AttendanceID INT UNIQUE,
+    BiometricID VARCHAR(50),
+    LeaveQuota INT DEFAULT 0,
+    LeaveBalance INT DEFAULT 0,
+    ShiftDetails VARCHAR(50),
+    PerformanceRating FLOAT,
+    Achievements TEXT,
+    Appraisals TEXT,
+    DisciplinaryActions TEXT,
+    MedicalInformation TEXT,
+    ExtraCurricularInvolvement TEXT,
+    LanguagesSpoken TEXT,
+    Notes TEXT,
+    FOREIGN KEY (DepartmentID) REFERENCES Departments(DepartmentID),
+    FOREIGN KEY (SupervisorID) REFERENCES Staff(StaffID)
+);
+Table: Departments
+sql
+Copy code
+CREATE TABLE Departments (
+    DepartmentID INT PRIMARY KEY AUTO_INCREMENT,
+    DepartmentName VARCHAR(100) NOT NULL UNIQUE
+);
+Table: Qualifications
+sql
+Copy code
+CREATE TABLE Qualifications (
+    QualificationID INT PRIMARY KEY AUTO_INCREMENT,
+    StaffID INT NOT NULL,
+    Degree VARCHAR(100) NOT NULL,
+    Specialization VARCHAR(100),
+    InstitutionName VARCHAR(100),
+    YearOfCompletion YEAR,
+    FOREIGN KEY (StaffID) REFERENCES Staff(StaffID)
+);
+Table: Certifications
+sql
+Copy code
+CREATE TABLE Certifications (
+    CertificationID INT PRIMARY KEY AUTO_INCREMENT,
+    StaffID INT NOT NULL,
+    CertificationName VARCHAR(100) NOT NULL,
+    IssuingOrganization VARCHAR(100),
+    YearOfIssue YEAR,
+    FOREIGN KEY (StaffID) REFERENCES Staff(StaffID)
+);
+Table: FinancialDetails
+sql
+Copy code
+CREATE TABLE FinancialDetails (
+    FinancialID INT PRIMARY KEY AUTO_INCREMENT,
+    StaffID INT NOT NULL,
+    Salary DECIMAL(10, 2) NOT NULL,
+    PaymentMethod ENUM('Bank Transfer', 'Cash', 'Cheque') NOT NULL,
+    BankAccountNumber VARCHAR(50),
+    TaxNumber VARCHAR(50),
+    Allowances TEXT,
+    Deductions TEXT,
+    FOREIGN KEY (StaffID) REFERENCES Staff(StaffID)
+);
+Table: Attendance
+sql
+Copy code
+CREATE TABLE Attendance (
+    AttendanceID INT PRIMARY KEY AUTO_INCREMENT,
+    StaffID INT NOT NULL,
+    Date DATE NOT NULL,
+    CheckInTime TIME,
+    CheckOutTime TIME,
+    Status ENUM('Present', 'Absent', 'On Leave', 'Late') NOT NULL,
+    FOREIGN KEY (StaffID) REFERENCES Staff(StaffID)
+);
+Table: PerformanceAppraisals
+sql
+Copy code
+CREATE TABLE PerformanceAppraisals (
+    AppraisalID INT PRIMARY KEY AUTO_INCREMENT,
+    StaffID INT NOT NULL,
+    AppraisalDate DATE NOT NULL,
+    PerformanceRating FLOAT NOT NULL,
+    Comments TEXT,
+    FOREIGN KEY (StaffID) REFERENCES Staff(StaffID)
+);
+Key Points
+Staff Table: Central table holding essential staff details.
+Departments Table: Maintains departmental information for referencing.
+Qualifications & Certifications Tables: Tracks academic and professional details.
+Financial Details: Stores salary and payment-related information.
+Attendance Table: Logs attendance data.
+PerformanceAppraisals: Tracks performance evaluations.
+Would you like me to add sample data, create views, or optimize for a specific database (e.g., MySQL, PostgreSQL)?
