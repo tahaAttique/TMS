@@ -1,0 +1,101 @@
+{
+  "template": "app",
+  "imports": {
+    "Volo.Abp.LeptonXLiteTheme": {
+      "version": "4.0.3",
+      "isInstalled": true
+    },
+    "Volo.Abp.Account": {
+      "version": "9.0.2",
+      "isInstalled": true
+    },
+    "Volo.Abp.OpenIddict": {
+      "version": "9.0.2",
+      "isInstalled": true
+    },
+    "Volo.Abp.Identity": {
+      "version": "9.0.2",
+      "isInstalled": true
+    },
+    "Volo.Abp.TenantManagement": {
+      "version": "9.0.2",
+      "isInstalled": true
+    },
+    "Volo.Abp.SettingManagement": {
+      "version": "9.0.2",
+      "isInstalled": true
+    },
+    "Volo.Abp.PermissionManagement": {
+      "version": "9.0.2",
+      "isInstalled": true
+    },
+    "Volo.Abp.FeatureManagement": {
+      "version": "9.0.2",
+      "isInstalled": true
+    }
+  },
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {}
+    }
+  },
+  "packages": {
+    "TMS.Application": {
+      "path": "src/TMS.Application/TMS.Application.abppkg",
+      "folder": "src"
+    },
+    "TMS.Application.Tests": {
+      "path": "test/TMS.Application.Tests/TMS.Application.Tests.abppkg",
+      "folder": "test"
+    },
+    "TMS.Domain.Shared": {
+      "path": "src/TMS.Domain.Shared/TMS.Domain.Shared.abppkg",
+      "folder": "src"
+    },
+    "TMS.Application.Contracts": {
+      "path": "src/TMS.Application.Contracts/TMS.Application.Contracts.abppkg",
+      "folder": "src"
+    },
+    "TMS.HttpApi": {
+      "path": "src/TMS.HttpApi/TMS.HttpApi.abppkg",
+      "folder": "src"
+    },
+    "TMS.HttpApi.Client": {
+      "path": "src/TMS.HttpApi.Client/TMS.HttpApi.Client.abppkg",
+      "folder": "src"
+    },
+    "TMS.EntityFrameworkCore.Tests": {
+      "path": "test/TMS.EntityFrameworkCore.Tests/TMS.EntityFrameworkCore.Tests.abppkg",
+      "folder": "test"
+    },
+    "TMS.EntityFrameworkCore": {
+      "path": "src/TMS.EntityFrameworkCore/TMS.EntityFrameworkCore.abppkg",
+      "folder": "src"
+    },
+    "TMS.TestBase": {
+      "path": "test/TMS.TestBase/TMS.TestBase.abppkg",
+      "folder": "test"
+    },
+    "TMS.Domain.Tests": {
+      "path": "test/TMS.Domain.Tests/TMS.Domain.Tests.abppkg",
+      "folder": "test"
+    },
+    "TMS.HttpApi.Client.ConsoleTestApp": {
+      "path": "test/TMS.HttpApi.Client.ConsoleTestApp/TMS.HttpApi.Client.ConsoleTestApp.abppkg",
+      "folder": "test"
+    },
+    "TMS.DbMigrator": {
+      "path": "src/TMS.DbMigrator/TMS.DbMigrator.abppkg",
+      "folder": "src"
+    },
+    "TMS.HttpApi.Host": {
+      "path": "src/TMS.HttpApi.Host/TMS.HttpApi.Host.abppkg",
+      "folder": "src"
+    },
+    "TMS.Domain": {
+      "path": "src/TMS.Domain/TMS.Domain.abppkg",
+      "folder": "src"
+    }
+  }
+}

@@ -1,0 +1,155 @@
+<abp-page>
+    <div class="d-flex justify-content-between align-items-center">
+        <span class="span-custom-title-color">{{ '::NewTicket' | abpLocalization }}</span>
+        <img src="../../../assets/images/logo/ticket.png    " alt="Bug Icon" />
+    </div>
+    <hr />
+    <div class="container mt-4">
+        <div class="row">
+            <!-- First Card -->
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-body">
+                        <form [formGroup]="form" (ngSubmit)="save()">
+                            <div class="col">
+                                <div class="mb-3">
+                                    <label class="form-label d-block">{{ '::Addatitle' | abpLocalization }}</label>
+                                    <input type="text" class="form-control" formControlName="title"  placeholder="Title">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label d-block">{{'::Description' | abpLocalization}}</label>
+                                    <span>{{'::Pleaseshareaclearandconcisedescriptionoftheproblem' |
+                                        abpLocalization}}</span>
+                                    <nz-tabset [(nzSelectedIndex)]="selectedDescriptionTabIndex">
+                                        <nz-tab nzTitle="{{'::Write' | abpLocalization}}">
+                                            <quill-editor class="auto-width-editor"
+                                                *ngIf="selectedDescriptionTabIndex === 0"
+                                                formControlName="description"
+                                                [(ngModel)]="descriptionEditorContent" [modules]="modules"
+                                                [ngModelOptions]="{ standalone: true }">
+                                            </quill-editor>
+                                        </nz-tab>
+                                        <nz-tab nzTitle="{{'::Preview' | abpLocalization}}">
+                                            <div *ngIf="selectedDescriptionTabIndex === 1">
+                                                <div [innerHtml]="descriptionEditorContent"></div>
+                                            </div>
+                                        </nz-tab>
+                                    </nz-tabset>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label d-block">{{'::Expectedbehavior' | abpLocalization}}</label>
+                                    <span>{{'::Provideadescriptionoftheexpectedbehavior' | abpLocalization}}</span>
+                                    <nz-tabset [(nzSelectedIndex)]="selectedBehaviorTabIndex">
+                                        <nz-tab nzTitle="{{'::Write' | abpLocalization}}">
+                                            <quill-editor class="auto-width-editor"
+                                                *ngIf="selectedBehaviorTabIndex === 0"
+                                                formControlName="expectedBehaviour"
+                                                [(ngModel)]="expectedBehaviorEditorContent" [modules]="modules"
+                                                [ngModelOptions]="{ standalone: true }">
+                                            </quill-editor>
+                                        </nz-tab>
+                                        <nz-tab nzTitle="{{'::Preview' | abpLocalization}}">
+                                            <div *ngIf="selectedBehaviorTabIndex === 1">
+                                                <div [innerHtml]="expectedBehaviorEditorContent"></div>
+                                            </div>
+                                        </nz-tab>
+                                    </nz-tabset>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label d-block">{{'::Actualbehavior' | abpLocalization}}</label>
+                                    <span>{{'::Provideadescriptionoftheactualbehaviorobserved' |
+                                        abpLocalization}}</span>
+                                    <nz-tabset [(nzSelectedIndex)]="selectedactualBehaviorTabIndex">
+                                        <nz-tab nzTitle="{{'::Write' | abpLocalization}}">
+                                            <quill-editor class="auto-width-editor"
+                                                *ngIf="selectedactualBehaviorTabIndex === 0"
+                                                formControlName="actualBehaviour"
+                                                [(ngModel)]="actualBehaviorEditorContent" [modules]="modules"
+                                                [ngModelOptions]="{ standalone: true }">
+                                            </quill-editor>
+                                        </nz-tab>
+                                        <nz-tab nzTitle="{{'::Preview' | abpLocalization}}">
+                                            <div *ngIf="selectedactualBehaviorTabIndex === 1">
+                                                <div [innerHtml]="actualBehaviorEditorContent"></div>
+                                            </div>
+                                        </nz-tab>
+                                    </nz-tabset>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label d-block">{{'::StepsToReproduce' | abpLocalization}}</label>
+                                    <nz-tabset [(nzSelectedIndex)]="selectedStepsToReproduceTabIndex">
+                                        <nz-tab nzTitle="{{'::Write' | abpLocalization}}">
+                                            <quill-editor class="auto-width-editor"
+                                                *ngIf="selectedStepsToReproduceTabIndex === 0"
+                                                formControlName="stepsToReproduce"
+                                                [(ngModel)]="stepsToReproduceEditorContent" [modules]="modules"
+                                                [ngModelOptions]="{ standalone: true }">
+                                            </quill-editor>
+                                        </nz-tab>
+                                        <nz-tab nzTitle="{{'::Preview' | abpLocalization}}">
+                                            <div *ngIf="selectedStepsToReproduceTabIndex === 1">
+                                                <div [innerHtml]="stepsToReproduceEditorContent"></div>
+                                            </div>
+                                        </nz-tab>
+                                    </nz-tabset>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label d-block">{{'::KnownWorkAround' | abpLocalization}}</label>
+                                    <span>{{'::Ifyouhaveanideawheretheproblemmightlie,letusknowthathere' |
+                                        abpLocalization}}</span>
+                                    <nz-tabset [(nzSelectedIndex)]="selectednonWorkRoundTabIndex">
+                                        <nz-tab nzTitle="{{'::Write' | abpLocalization}}">
+                                            <quill-editor class="auto-width-editor"
+                                                *ngIf="selectednonWorkRoundTabIndex === 0"
+                                                formControlName="nonWorkRound"
+                                                [(ngModel)]="nonWorkRoundEditorContent" [modules]="modules"
+                                                [ngModelOptions]="{ standalone: true }">
+                                            </quill-editor>
+                                        </nz-tab>
+                                        <nz-tab nzTitle="{{'::Preview' | abpLocalization}}">
+                                            <div *ngIf="selectednonWorkRoundTabIndex === 1">
+                                                <div [innerHtml]="nonWorkRoundEditorContent"></div>
+                                            </div>
+                                        </nz-tab>
+                                    </nz-tabset>
+                                </div>
+
+                                <div class="row">
+                                    <div class="mb-4 col-sm-6">
+                                        <label class="form-label d-block">{{'::Category' | abpLocalization}}</label>
+                                        <nz-select class="form-control" formControlName="ticketCategoryId" nzAllowClear nzShowSearch nzShowClear>
+                                            <nz-option *ngFor="let category of ticketCategories" [nzValue]="category.id"
+                                                [nzLabel]="category.name"></nz-option>
+                                        </nz-select>
+                                    </div>
+                                    <div class="mb-4 col-sm-6">
+                                        <label class="form-label d-block">{{'::SelectOperatingSystem' | abpLocalization}}</label>
+                                        <nz-select class="form-control" formControlName="operatingSystem" nzAllowClear nzShowSearch>
+                                            <nz-option *ngFor="let item of osList" [nzValue]="item.value" [nzLabel]="item.label"></nz-option>
+                                        </nz-select>
+                                    </div>
+                                </div>
+                                <div class="text-end">
+                                    <button class="btn btn-primary btn-sm">
+                                        {{'::SubmitNewTicket' | abpLocalization}}
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- Second Card -->
+            <div class="col-md-3">
+                <div class="card custom-side-card">
+                    <div class="card-body">
+                        <img src="../../../assets/images/logo/freepik__upload__97942.png" alt="Bug Icon" />
+                        <p>
+                            {{'::SideCreateTicketDescription' | abpLocalization}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</abp-page>

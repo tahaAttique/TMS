@@ -1,0 +1,20 @@
+<abp-page [title]="'::Menu:Notifications' | abpLocalization">
+  <div class="card">
+    <div class="card-body">
+      <div class="card-header text-white d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">{{'::AllNotifications' | abpLocalization}}<span class="badge notificationTotalCount text-white ms-2">{{ notificationList.length }}</span></h5>
+        <button *ngIf="notificationList.length > 0" (click)="clearNotifications()" class="btn btn-sm text-white notificationTotalCount">{{'::ClearAll' | abpLocalization}}</button>
+      </div>
+      <div class="card-body p-3">
+        <ul class="list-group" *ngIf="notificationList.length > 0; else noNotifications">
+          <li class="list-group-item d-flex align-items-center" *ngFor="let notification of notificationList">
+            <span class="me-2">🔔</span> {{ notification }}
+          </li>
+        </ul>
+        <ng-template #noNotifications>
+          <p class="text-center text-muted">{{'::Nonewnotifications' | abpLocalization}}</p>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</abp-page>

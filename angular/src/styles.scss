@@ -1,0 +1,382 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "../node_modules/ng-zorro-antd/ng-zorro-antd.min.css";
+@import 'quill/dist/quill.snow.css';
+
+:root .lpx-brand-logo {
+  --lpx-logo: url('/assets/images/logo/logo-light.svg');
+  --lpx-logo-icon: url('/assets/images/logo/icon.svg');
+}
+
+:root {
+  --lpx-theme-light-bg: url('/assets/images/login/login-bg-img-light.svg');
+  --lpx-theme-dim-bg: url('/assets/images/login/login-bg-img-dim.svg');
+  --lpx-theme-dark-bg: url('/assets/images/login/login-bg-img-dark.svg');
+
+  .abp-logo {
+    background-repeat: no-repeat;
+  }
+
+  .abp-support {
+    width: 178px;
+    height: 30px;
+    background-image: url('/assets/images/getting-started/abp-support.svg');
+  }
+
+  .abp-community {
+    width: 215px;
+    height: 30px;
+    background-image: url('/assets/images/getting-started/abp-community.svg');
+  }
+
+  .abp-blog {
+    width: 142px;
+    height: 30px;
+    background-image: url('/assets/images/getting-started/abp-blog.svg');
+  }
+
+  .logo-x {
+    width: 20px;
+    height: 20px;
+    background-image: url('/assets/images/getting-started/x.svg');
+  }
+
+
+}
+
+.custom-toolbar-row {
+  display: flex;
+  justify-content: end;
+}
+
+.custom-toolbar-row nz-select {
+  min-width: 200px;
+}
+
+.ant-select-focused:not(.ant-select-disabled).ant-select:not(.ant-select-customize-input) .ant-select-selector,
+.ant-select:not(.ant-select-disabled):hover .ant-select-selector {
+  border-color: #e7e9ec;
+  box-shadow: unset;
+}
+
+.cdk-overlay-container {
+  z-index: 10600 !important;
+}
+
+.custom-select-input {
+  height: 35px;
+}
+
+.card {
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd;
+}
+
+.card-body {
+  padding: 2rem;
+}
+
+.custom-card {
+  height: 300px;
+  margin: 20px auto;
+}
+
+label.required::after {
+  content: '*';
+  margin-left: 3px;
+  color: red;
+}
+
+
+.card-title {
+  font-weight: 600;
+  color: #333333;
+}
+
+.badge {
+  font-size: 0.750rem;
+  padding: 0.35rem 0.9rem 0.45rem;
+  border-radius: 0.25rem;
+}
+
+.status-box {
+  width: 10px;
+  height: 10px;
+  border-radius: 10px;
+  display: inline-block;
+  box-shadow: 0 0 10px #fdad00dc;
+}
+
+body {
+  height: auto;
+}
+
+@media (min-width: 1400px) {
+  .container-xxl, .container-xl, .container-lg, .container-md, .container-sm, .container {
+      max-width: 100vw;
+      padding-left: 2%;
+      padding-right: 2%;
+  }
+}
+#main-navbar {
+  margin-bottom: 15px !important;
+  background-color: #DD1A1E !important;
+}
+
+.btn-primary {
+  --bs-btn-bg:  #DD1A1E !important;
+  --bs-btn-hover-bg:  #dd1a1db4 !important;
+  --bs-btn-border-color: #dd1a1db4 !important;
+  --bs-btn-hover-border-color: #dd1a1db4 !important;
+  --bs-btn-active-bg: #DD1A1E !important;
+  --bs-btn-active-border-color: #dd1a1db4 !important;
+  --bs-btn-active-border-color:#dd1a1db4 !important;
+  --bs-btn-disabled-bg: #dd1a1db4 !important;
+  --bs-btn-disabled-border-color: #DD1A1E !important;
+  --bs-btn-active-shadow: #DD1A1E !important;
+  --bs-btn-focus-shadow-rgb: #DD1A1E !important;
+}
+
+.btn-outline-primary {
+  --bs-btn-hover-bg:  #DD1A1E !important;
+  --bs-btn-border-color: #DD1A1E !important;
+  --bs-btn-color: #DD1A1E !important;
+  --bs-btn-hover-border-color: #DD1A1E !important;
+  --bs-btn-active-bg: #DD1A1E !important;
+  --bs-btn-active-border-color: #dd1a1db4 !important;
+  --bs-btn-active-border-color:#dd1a1db4 !important;
+  --bs-btn-disabled-bg: #dd1a1db4 !important;
+  --bs-btn-active-shadow: #DD1A1E !important;
+  --bs-btn-focus-shadow-rgb: #DD1A1E !important;
+}
+
+.btn-outline-warning {
+  --bs-btn-hover-bg:  darkorange !important;
+  --bs-btn-border-color: #DD1A1E !important;
+  --bs-btn-color: #DD1A1E !important;
+  --bs-btn-hover-border-color: darkorange !important;
+  --bs-btn-active-bg: darkorange !important;
+  --bs-btn-hover-color: #fff !important;
+  --bs-btn-active-border-color: darkorange !important;
+  --bs-btn-disabled-bg: #dd1a1db4 !important;
+  --bs-btn-active-shadow: #DD1A1E !important;
+  --bs-btn-focus-shadow-rgb: #DD1A1E !important;
+  --bs-gradient: none;
+}
+
+.btn-outline-info {
+  --bs-btn-hover-bg:  #1890FF !important;
+  --bs-btn-border-color: #DD1A1E !important;
+  --bs-btn-color: #DD1A1E !important;
+  --bs-btn-hover-border-color: #1890FF !important;
+  --bs-btn-active-bg: #1890FF !important;
+  --bs-btn-hover-color: #fff !important;
+  --bs-btn-active-border-color: #1890FF !important;
+  --bs-btn-disabled-bg: #dd1a1db4 !important;
+  --bs-btn-active-shadow: #DD1A1E !important;
+  --bs-btn-focus-shadow-rgb: #DD1A1E !important;
+}
+
+.entry-row {
+  margin-bottom: 0px !important;
+}
+
+:root {
+  -bs-link-hover-color: #DD1A1E !important;
+}
+
+.content-header-title {
+  color: #DD1A1E !important;
+  font-weight: 650;
+}
+
+.card .card-title {
+  color: #0303039d !important;
+  font-weight: 650 !important;
+}
+
+.navbar.navbar-dark.bg-dark .navbar-brand {
+  font-weight: 700;
+  letter-spacing: .15rem;
+  font-size: 25px !important;
+}
+
+.navbar.navbar-dark.bg-dark .nav-item .nav-link {
+  color: rgb(255 255 255 / 90%) !important;
+}
+
+.badge.bg-warning {
+  color: #fff !important;
+  background-color: #c16502bf !important;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  color: #003348 !important;
+  font-weight: 620;
+}
+
+h7 {
+  font-weight: 610;
+  color: #003348 !important;
+  letter-spacing: .03rem;
+}
+
+.span-custom-color {
+  font-weight: 610;
+  color: #01121a8f !important;
+}
+
+.span-custom-title-color {
+  font-weight: 700;
+  font-size: x-large;
+  color: #DD1A1E !important;
+}
+
+.content-header-title {
+  color: #DD1A1E !important;
+  font-weight: 700 !important;
+  font-size: x-large !important;
+}
+
+.form-label {
+  color: #003348;
+  font-weight: 600;
+}
+
+.truncate-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  display: block;
+}
+.editor-container {
+  margin: 20px;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.custom-nzSelect-width {
+  width: auto;
+}
+
+// .form-control, .form-select {
+//     font-weight: 400 !important;
+//     background-color: #ffffff !important;
+//     border-radius: 0.5rem !important;
+//     transition: background-color 0.2s, border-color 0.4s !important;
+//     border-color: #e7e9ec !important;
+//     color: #161616 !important;
+// }
+
+.auto-width-editor {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.auto-width-editor .ql-container {
+  height: 100%;
+}
+
+.auto-width-editor .ql-editor {
+  width: 100%;
+}
+
+.custom-nzSelect-width {
+  width: 8.2vw;
+}
+
+.ql-container {
+  min-height: 120px !important;
+}
+
+.custom-header {
+  background-color: rgba(230, 214, 214, 0.267);
+  border-bottom: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.card {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.card-header {
+  font-weight: bold;
+}
+
+.list-group-item {
+  transition: all 0.3s ease-in-out;
+  border-left: 4px solid #DD1A1E;
+}
+
+.list-group-item:hover {
+  background: #f8f9fa;
+}
+
+.notificationTotalCount {
+  background-color: #DD1A1E;
+}
+
+button.btn-danger {
+  transition: all 0.3s;
+}
+
+button.btn-danger:hover {
+  background: darkred;
+}
+
+.ant-pagination-item-active a, .ant-pagination-item:focus-visible a, .ant-pagination-item:hover a {
+  color: #DD1A1E;
+}
+
+.ant-pagination-item-active a, .ant-pagination-item:focus-visible a, .ant-pagination-item:hover {
+  color: #DD1A1E;
+  border-color: #DD1A1E !important;
+
+}
+
+.ant-pagination-item-active {
+  font-weight: 500;
+  background: #fff;
+  border-color: #DD1A1E;
+}
+
+.custom-red-line {
+  border-top: 1px solid #DD1A1E;
+}
+
+.ant-pagination-next .ant-pagination-item-link, .ant-pagination-prev .ant-pagination-item-link:hover {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  font-size: 12px;
+  text-align: center;
+  background-color: #fff;
+  border: 1px solid #d9d9d9;
+  border-radius: 2px;
+  outline: 0;
+  transition: all .3s;
+  border-color: #DD1A1E !important;
+  color: #DD1A1E !important;
+}
+
+#main-navbar {
+  margin-bottom: 15px !important;
+  background-color: #DD1A1E !important;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+}
+
+
+
+
+
+
