@@ -1,0 +1,133 @@
+<abp-page>
+    <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex">
+            <span class="span-custom-title-color">{{ ticket?.title }}</span>
+            <!-- <h5 class="mt-2 ms-1">{{ ticket.title}}</h5> -->
+        </div>
+        <img src="../../../assets/images/logo/ticket.png    " alt="Bug Icon" />
+    </div>
+    <hr />
+    <div  class="container mt-4">
+        <div class="row">
+            <!-- First Card -->
+            <div class="col-md-9">
+                <form [formGroup]="form" (ngSubmit)="save()">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="mb-2">
+                                <label class="form-label"><i class="fas fa-file-alt"></i> {{'::Description' | abpLocalization}}</label>
+                                <div [innerHTML]="ticket?.description"></div>
+                            </div>
+                            <hr class="custom-red-line">
+                            <div class="mb-2">
+                                <label class="form-label"><i class="fas fa-eye"></i> {{'::Expectedbehavior' | abpLocalization}}</label>
+                                <div [innerHTML]="ticket?.expectedBehaviour"></div>
+                            </div>
+                            <hr class="custom-red-line">
+                            <div class="mb-2">
+                                <label class="form-label"><i class="fas fa-exclamation-circle"></i> {{'::Actualbehavior' | abpLocalization}}</label>
+                                <div [innerHTML]="ticket?.actualBehaviour"></div>
+                            </div>
+                            <hr class="custom-red-line">
+                            <div class="mb-2">
+                                <label class="form-label"><i class="fas fa-list-ol"></i> {{'::StepsToReproduce' | abpLocalization}}</label>
+                                <div [innerHTML]="ticket?.stepsToReproduce"></div>
+                            </div>
+                            <hr class="custom-red-line">
+                            <div class="mb-2">
+                                <label class="form-label"><i class="fas fa-tools"></i> {{'::KnownWorkAround' | abpLocalization}}</label>
+                                <div [innerHTML]="ticket?.knownWorkRound"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card" *ngFor="let comment of comments">
+                        <div class="card-body">
+                            <div class="card-header custom-header">
+                                <div class="row">
+                                    <label class="form-label">{{comment.userName}}</label>
+                                </div>
+                            </div>
+                            <div class="mt-1" [innerHTML]="comment.detail"></div>
+                        </div>
+                        <div class="text-end me-3 mb-2" *abpPermission="'TMS.Comments.Edit'">
+                            <i class="fa fa-edit text-primary me-2" nz-tooltip
+                                [nzTooltipTitle]="'Edit' | abpLocalization" [nzTooltipColor]="'blue'" (click)="editComment(comment.id)"></i>
+                    
+                            <i class="fa fa-trash text-danger" nz-tooltip [nzTooltipTitle]="'Delete' | abpLocalization"
+                                [nzTooltipColor]="'red'" (click)="delete(comment.id)"></i>
+                        </div>
+                    </div>
+                    
+                    <div *abpPermission="'TMS.Comments.Create'" class="mb-3">
+                        <div class="mb-3">
+                            <nz-tabset [(nzSelectedIndex)]="selectedCommentTabIndex">
+                                <nz-tab nzTitle="{{'::Write' | abpLocalization}}">
+                                    <quill-editor class="auto-width-editor" *ngIf="selectedCommentTabIndex === 0"
+                                        formControlName="detail" placeholder="enter your comment">
+                                    </quill-editor>
+                                </nz-tab>
+                                <nz-tab nzTitle="{{'::Preview' | abpLocalization}}">
+                                    <div *ngIf="selectedCommentTabIndex === 1">
+                                        <div [innerHtml]="commentEditorContent"></div>
+                                    </div>
+                                </nz-tab>
+                            </nz-tabset>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <button class="btn btn-primary d-flex align-items-center">
+                                <i class="fa fa-comment me-2"></i>
+                                {{ (selectedComment ? '::SaveComment' : '::EditComment') | abpLocalization }}
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- Second Card -->
+            <div class="col-md-3">
+                <div class="card custom-side-card">
+                    <div class="card-body">
+                        <img src="../../../assets/images/logo/freepik__upload__97942.png" alt="Bug Icon" />
+                        <div class="d-flex" *ngIf="ticket?.operatingSystem">
+                            <label class="form-label">{{'::OperatingSystem' | abpLocalization}}:</label>
+                            <div class="ms-1">{{ ticket.operatingSystem }}</div>
+                        </div>
+                        <div class="d-flex" *ngIf="ticket?.ticketCategory">
+                            <label class="form-label">{{'::Category' | abpLocalization}}:</label>
+                            <div class="ms-1">{{ ticket.ticketCategory }}</div>
+                        </div>
+                        <div class="d-flex" *ngIf="ticket?.userName">
+                            <label class="form-label">{{'::CreatedBy' | abpLocalization}}:</label>
+                            <div class="ms-1">{{ ticket.userName }}</div>
+                        </div>
+                        <div class="d-flex" *ngIf="ticket?.assignedUserName">
+                            <label class="form-label">{{'::Assignee' | abpLocalization}}:</label>
+                            <div class="ms-1">{{ ticket.assignedUserName }}</div>
+                        </div>
+                        <div class="d-flex" *ngIf="ticket?.priorityType">
+                            <label class="form-label">{{'::PriorityType' | abpLocalization}}:</label>
+                            <div class="ms-1">{{'::Enum:PriorityType.' + ticket.priorityType | abpLocalization }}</div>
+                        </div>
+                        <div class="d-flex" *ngIf="ticket?.statusType">
+                            <label class="form-label">{{'::StatusType' | abpLocalization}}:</label>
+                            <div class="ms-1">{{'::Enum:StatusType.' + ticket.statusType | abpLocalization }}</div>
+                        </div>
+                        <div class="d-flex" *ngIf="ticket?.createdDate">
+                            <label class="form-label">{{'::CreatedDate' | abpLocalization}}:</label>
+                            <div class="ms-1">{{ ticket.createdDate | date: 'yyyy-MM-dd' }}</div>
+                        </div>
+                        <div class="form-group" *abpPermission="'TMS.Comments.Status'">
+                            <label class="form-label">{{'::SetStatus' | abpLocalization}}</label>
+                            <nz-select class="form-control" nzAllowClear nzShowSearch nzPlaceHolder="Status" nzSize="large"
+                            [(ngModel)]="ticket.statusType"
+                             (ngModelChange)="updateStatus($event)">
+                              <nz-option *ngFor="let type of statusType" [nzValue]="type.value"
+                               [nzLabel]="'::Enum:StatusType.' +type.value | abpLocalization"></nz-option>
+                            </nz-select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</abp-page>

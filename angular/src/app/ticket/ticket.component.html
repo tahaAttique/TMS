@@ -1,0 +1,183 @@
+<abp-page [title]="'::Menu:Tickets' | abpLocalization">
+  <abp-page-toolbar-container class="col">
+    <div class="text-end">
+      <button class="btn btn-primary btn-sm" type="button" (click)="nagivateToCreateTicket()">
+        <span>{{'::NewTicket' | abpLocalization}}</span>
+      </button>
+    </div>
+  </abp-page-toolbar-container>
+
+  <div class="card">
+    <div class="card-body">
+      <form (ngSubmit)="this.list.get()" (keyup.enter)="this.list.get()">
+        <div class="row mb-2">
+          <div class="col-sm-10">
+            <div class="input-group">
+              <input type="search" class="form-control" placeholder="Search Here" id="filterText"
+                [(ngModel)]="filters.filter" [ngModelOptions]="{standalone:true}" />
+              <button type="submit" class="btn btn-primary" title="Search" (click)="this.list.get()">
+                <i class="fa fa-search"></i>
+              </button>
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <button class="btn btn-outline-primary w-100" (click)="showFilter = !showFilter">
+              {{'::Filters' | abpLocalization}}
+              <i class="fas fa-angle-down" *ngIf="!showFilter"></i>
+              <i class="fas fa-angle-up" *ngIf="showFilter"></i>
+            </button>
+          </div>
+        </div>
+        <div *ngIf="showFilter">
+          <div class="row mt-2">
+            <div class="col-sm-2">
+              <nz-select class="form-control" nzAllowClear nzShowSearch nzPlaceHolder="Assignee"
+                [(ngModel)]="filters.assignedToUserId" [ngModelOptions]="{standalone:true}">
+                <nz-option *ngFor="let agent of agents" [nzValue]="agent.id" [nzLabel]="agent.userName"></nz-option>
+              </nz-select>
+            </div>
+            <div class="col-sm-2">
+              <nz-select class="form-control" nzAllowClear nzShowSearch nzPlaceHolder="Creator"
+                [(ngModel)]="filters.userId" [ngModelOptions]="{standalone: true}">
+                <nz-option *ngFor="let customer of customers" [nzValue]="customer.id"
+                  [nzLabel]="customer.userName"></nz-option>
+              </nz-select>
+            </div>
+            <div class="col-sm-2">
+              <nz-select class="form-control" nzAllowClear nzShowSearch nzPlaceHolder="Status"
+                [(ngModel)]="filters.statusType" [ngModelOptions]="{standalone:true}">
+                <nz-option *ngFor="let type of statusType" [nzValue]="type.value"
+                  [nzLabel]="'::Enum:StatusType.' +type.value | abpLocalization"></nz-option>
+              </nz-select>
+            </div>
+            <div class="col-sm-2">
+              <nz-select class="form-control" nzAllowClear nzShowSearch nzPlaceHolder="Priority"
+                [(ngModel)]="filters.priorityType" [ngModelOptions]="{standalone:true}">
+                <nz-option *ngFor="let type of priorityType" [nzValue]="type.value"
+                  [nzLabel]="'::Enum:PriorityType.' + type.value | abpLocalization"></nz-option>
+              </nz-select>
+            </div>
+            <div class="col-sm-2">
+              <nz-select class="form-control" nzAllowClear nzShowSearch nzShowClear nzPlaceHolder="Category"
+                [(ngModel)]="filters.ticketCategoryId" [ngModelOptions]="{standalone:true}">
+                <nz-option *ngFor="let category of ticketCategories" [nzValue]="category.id"
+                  [nzLabel]="category.name"></nz-option>
+              </nz-select>
+            </div>
+            <div class="col-sm-auto d-flex gap-1 align-items-end h-100">
+              <button type="button" class="btn btn-sm btn-outline-primary" (click)="clearFilter()">
+                <i class="fas fa-undo"></i>
+                {{'::AbpUi:Reset' | abpLocalization}}
+              </button>
+              <button type="button" class="btn btn-primary btn-sm" (click)="this.list.get()">
+                <i class="fa fa-filter"></i>
+                {{'::AbpUi:Filter' | abpLocalization}}
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="card mb-2" *ngFor="let ticket of ticket.items">
+    <div class="card-body">
+      <!-- Title Section -->
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <div class="d-flex align-items-center">
+          <div class="status-box me-1" [ngClass]="getStatusInfo(ticket.statusType).class" nz-tooltip
+            [nzTooltipTitle]="getStatusInfo(ticket.statusType).tooltip"
+            [nzTooltipColor]="getStatusInfo(ticket.statusType).tooltipColor"></div>
+          <h5 class="card-title pointer" (click)="nagivateoComment(ticket.id)">{{ ticket.title }}</h5>
+        </div>
+        <div class="d-flex align-items-center">
+          <div>
+            <span class="badge bg-info me-1">{{ticket.ticketCategory}}</span>
+            <span class="badge bg-warning">{{'::SupportTeam' | abpLocalization}}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Description Section -->
+      <p class="card-text text-muted mb-3">{{'::ticketDescription' | abpLocalization}}</p>
+
+      <!-- Footer with Actions -->
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <div *ngIf="ticket?.createdDate">
+            <i class="fa fa-calendar"></i>
+            <span class="span-custom-color ms-1">{{'::Createdon:' | abpLocalization}}</span><small
+              class="text-muted ms-1">{{ ticket.createdDate |
+              date: 'yyyy-MM-dd' }}</small>
+            <br>
+          </div>
+          <div *ngIf="ticket?.assignedUserName">
+            <i class="fas fa-user"></i>
+            <span class="span-custom-color ms-1">{{'::Assignee:' | abpLocalization}}</span>
+            <h7 class="text-uppercase text-muted">{{ticket.assignedUserName}}</h7>
+          </div>
+        </div>
+        <div class="d-flex gap-1">
+          <button *abpPermission="'TMS.Tickets.Delete'" class="btn btn-outline-primary btn-sm" nz-tooltip
+            [nzTooltipTitle]="'::Delete' | abpLocalization" [nzTooltipColor]="'red'" (click)="delete(ticket.id)"><i
+              class="fas fa-trash"></i></button>
+
+          <button class="btn btn-outline-warning btn-sm" *abpPermission="'TMS.Tickets.Assign'" nz-tooltip
+            [nzTooltipTitle]="'::Assign' | abpLocalization" [nzTooltipColor]="'orange'"
+            (click)="openAssignModal(ticket)"><i class="fas fa-user-plus"></i></button>
+
+          <button class="btn btn-outline-info btn-sm" nz-tooltip [nzTooltipTitle]="'::ViewDetail' | abpLocalization"
+            (click)="nagivateoComment(ticket.id)" [nzTooltipColor]="'blue'"><i class="fas fa-info-circle"></i></button>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row d-flex justify-content-between p-2">
+    <div class="col-md-2"><span class="span-custom-color ms-1">{{'::TotalCount' |
+        abpLocalization}}{{ticket.totalCount}}</span></div>
+    <div class="col-md-10 text-end">
+      <nz-pagination [nzPageIndex]="currentPage" [nzPageSize]="pageSize" [nzTotal]="ticket.totalCount"
+        (nzPageIndexChange)="onPageChange($event)">
+      </nz-pagination>
+    </div>
+  </div>
+</abp-page>
+
+
+<abp-modal [(visible)]="isAssignOpen">
+  <ng-template #abpHeader>
+    <h3 class="truncate-title" title="{{ selectedTicket?.title }}">
+      {{ '::AssignTicket' | abpLocalization }}:
+      <span class="truncate-title-content">{{ selectedTicket?.title || '...' }}</span>
+    </h3>
+  </ng-template>
+
+  <ng-template #abpBody>
+    <form [formGroup]="assignTicketForm">
+      <div class="form-group mb-2">
+        <label class="form-label">{{'::Agent' | abpLocalization}}</label>
+        <nz-select class="form-control" nzAllowClear nzShowSearch nzSize="large" formControlName="assignToAgentId">
+          <nz-option *ngFor="let agent of agents" [nzValue]="agent.id" [nzLabel]="agent.userName"></nz-option>
+        </nz-select>
+      </div>
+      <div class="form-group mb-2">
+        <label class="form-label">{{'::Priority' | abpLocalization}}</label>
+        <nz-select class="form-control" nzAllowClear nzShowSearch nzSize="large" formControlName="priorityType">
+          <nz-option *ngFor="let type of priorityType" [nzValue]="type.value"
+            [nzLabel]="'::Enum:PriorityType.' + type.value | abpLocalization"></nz-option>
+        </nz-select>
+      </div>
+    </form>
+  </ng-template>
+
+  <ng-template #abpFooter>
+    <button class="btn btn-secondary" (click)="isAssignOpen = false">
+      {{'::Close' | abpLocalization}}
+    </button>
+    <button class="btn btn-primary" (click)="onAssignTicket()">
+      {{'::Assign' | abpLocalization}}
+    </button>
+  </ng-template>
+</abp-modal>
